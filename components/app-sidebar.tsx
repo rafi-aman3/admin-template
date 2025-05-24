@@ -3,15 +3,23 @@
 import * as React from "react";
 import {
   AudioWaveform,
+  BarChart4,
   BookOpen,
   Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
+  LayoutDashboard,
+  LineChart,
   Map,
+  Package,
   PieChart,
   Settings2,
+  ShoppingBag,
+  ShoppingCart,
   SquareTerminal,
+  Users,
+  Wallet,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -52,64 +60,152 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutDashboard,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Overview",
+          url: "/dashboard",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Sales Analytics",
+          url: "/dashboard/sales-analytics",
         },
         {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
+          title: "Product Insights",
+          url: "/dashboard/product-insights",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Order Management",
+          url: "/dashboard/order-management",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Customers",
+          url: "/dashboard/customers",
+        },
+        {
+          title: "Marketing & Traffic",
+          url: "/dashboard/marketing",
+        },
+        {
+          title: "Payments",
+          url: "/dashboard/payments",
         },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      title: "Sales",
+      url: "/dashboard/sales-analytics",
+      icon: LineChart,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "Analytics",
+          url: "/dashboard/sales-analytics",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Reports",
+          url: "/dashboard/sales-analytics",
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: "Forecasts",
+          url: "/dashboard/sales-analytics",
+        },
+      ],
+    },
+    {
+      title: "Products",
+      url: "/dashboard/product-insights",
+      icon: ShoppingBag,
+      items: [
+        {
+          title: "Inventory",
+          url: "/dashboard/product-insights",
         },
         {
-          title: "Changelog",
-          url: "#",
+          title: "Categories",
+          url: "/dashboard/product-insights",
+        },
+        {
+          title: "Performance",
+          url: "/dashboard/product-insights",
+        },
+      ],
+    },
+    {
+      title: "Orders",
+      url: "/dashboard/order-management",
+      icon: Package,
+      items: [
+        {
+          title: "All Orders",
+          url: "/dashboard/order-management",
+        },
+        {
+          title: "Pending",
+          url: "/dashboard/order-management",
+        },
+        {
+          title: "Completed",
+          url: "/dashboard/order-management",
+        },
+      ],
+    },
+    {
+      title: "Customers",
+      url: "/dashboard/customers",
+      icon: Users,
+      items: [
+        {
+          title: "All Customers",
+          url: "/dashboard/customers",
+        },
+        {
+          title: "Segments",
+          url: "/dashboard/customers",
+        },
+        {
+          title: "Feedback",
+          url: "/dashboard/customers",
+        },
+      ],
+    },
+    {
+      title: "Marketing",
+      url: "/dashboard/marketing",
+      icon: BarChart4,
+      items: [
+        {
+          title: "Campaigns",
+          url: "/dashboard/marketing",
+        },
+        {
+          title: "Traffic Sources",
+          url: "/dashboard/marketing",
+        },
+        {
+          title: "Conversions",
+          url: "/dashboard/marketing",
+        },
+      ],
+    },
+    {
+      title: "Payments",
+      url: "/dashboard/payments",
+      icon: Wallet,
+      items: [
+        {
+          title: "Transactions",
+          url: "/dashboard/payments",
+        },
+        {
+          title: "Refunds",
+          url: "/dashboard/payments",
+        },
+        {
+          title: "Invoices",
+          url: "/dashboard/payments",
         },
       ],
     },

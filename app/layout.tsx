@@ -9,6 +9,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,22 +33,24 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {/* <header className="flex items-center justify-end p-4">
-            <SignedOut>
-              <div className="flex gap-2">
-                <SignInButton />
-                <SignUpButton />
-              </div>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-          </header> */}
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {/* <header className="flex items-center justify-end p-4">
+              <SignedOut>
+                <div className="flex gap-2">
+                  <SignInButton />
+                  <SignUpButton />
+                </div>
+              </SignedOut>
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+            </header> */}
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
