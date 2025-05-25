@@ -121,7 +121,7 @@ const data = {
       items: [
         {
           title: "Inventory",
-          url: "/dashboard/product-insights",
+          url: "/dashboard/product-inventory",
         },
         {
           title: "Categories",

@@ -20,6 +20,15 @@ import {
   Percent,
   UserPlus,
 } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as RechartsTooltip,
+} from "recharts";
 
 // Mock data for the dashboard
 const kpiData = [
@@ -207,7 +216,14 @@ export default function Page() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {kpiData.map((kpi, index) => (
-            <Card key={index} className="overflow-hidden">
+            <Card
+              key={index}
+              className={`overflow-hidden ${
+                kpi.title === "Total Customers"
+                  ? "md:col-span-2 lg:col-span-2 md:row-span-2"
+                  : ""
+              }`}
+            >
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-center">
                   <CardTitle className="text-sm font-medium">
@@ -217,24 +233,102 @@ export default function Page() {
                 </div>
               </CardHeader>
               <CardContent className="pb-2">
-                <div className="text-2xl font-bold">{kpi.value}</div>
-                <div className="flex items-center mt-1">
-                  {kpi.trend === "up" ? (
-                    <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
-                  ) : (
-                    <ArrowDown className="h-4 w-4 text-red-500 mr-1" />
-                  )}
-                  <span
-                    className={
-                      kpi.trend === "up" ? "text-green-500" : "text-red-500"
-                    }
-                  >
-                    {kpi.change}
-                  </span>
-                  <span className="text-muted-foreground text-xs ml-1">
-                    {kpi.period}
-                  </span>
-                </div>
+                {kpi.title === "Total Customers" ? (
+                  <>
+                    <div className="text-2xl font-bold">75,782</div>
+                    <div className="flex items-center mt-1">
+                      <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
+                      <span className="text-green-500">2%</span>
+                      <span className="text-muted-foreground text-xs ml-1">
+                        24,635 users increased from last month
+                      </span>
+                    </div>
+                    <div className="h-40 mt-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={customerChartData}
+                          margin={{ top: 5, right: 10, left: -20, bottom: 0 }}
+                        >
+                          {/* <CartesianGrid
+                            strokeDasharray="3 3"
+                            vertical={false}
+                            stroke="#f0f0f0"
+                          /> */}
+                          <XAxis
+                            dataKey="day"
+                            tick={{ fontSize: 10 }}
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <YAxis hide />
+                          <RechartsTooltip
+                            formatter={(value, name) => [
+                              `${value} users`,
+                              name === "current" ? "This Month" : "Last Month",
+                            ]}
+                            labelFormatter={(label) => `Day ${label}`}
+                            contentStyle={{
+                              backgroundColor: "var(--card)",
+                              borderRadius: "var(--radius)",
+                              border: "1px solid var(--border)",
+                              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                              padding: "8px 12px",
+                            }}
+                            itemStyle={{
+                              color: "var(--foreground)",
+                              fontSize: "12px",
+                              fontWeight: 500,
+                            }}
+                            labelStyle={{
+                              color: "var(--muted-foreground)",
+                              fontSize: "12px",
+                              fontWeight: 600,
+                              marginBottom: "4px",
+                            }}
+                            cursor={{ stroke: "var(--border)", strokeWidth: 1 }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="previous"
+                            stroke="#d1d5db"
+                            strokeWidth={2}
+                            dot={false}
+                            activeDot={{ r: 4, strokeWidth: 0 }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="current"
+                            stroke="#3b82f6"
+                            strokeWidth={2}
+                            dot={false}
+                            activeDot={{ r: 4, strokeWidth: 0 }}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-2xl font-bold">{kpi.value}</div>
+                    <div className="flex items-center mt-1">
+                      {kpi.trend === "up" ? (
+                        <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
+                      ) : (
+                        <ArrowDown className="h-4 w-4 text-red-500 mr-1" />
+                      )}
+                      <span
+                        className={
+                          kpi.trend === "up" ? "text-green-500" : "text-red-500"
+                        }
+                      >
+                        {kpi.change}
+                      </span>
+                      <span className="text-muted-foreground text-xs ml-1">
+                        {kpi.period}
+                      </span>
+                    </div>
+                  </>
+                )}
               </CardContent>
             </Card>
           ))}
@@ -431,3 +525,14 @@ export default function Page() {
     </DashboardLayout>
   );
 }
+
+// Mock data for the Total Customers chart
+const customerChartData = [
+  { day: "01", current: 1200, previous: 1000 },
+  { day: "05", current: 1350, previous: 1100 },
+  { day: "10", current: 1500, previous: 1200 },
+  { day: "15", current: 1650, previous: 1300 },
+  { day: "20", current: 1800, previous: 1400 },
+  { day: "25", current: 1950, previous: 1500 },
+  { day: "30", current: 2100, previous: 1600 },
+];
